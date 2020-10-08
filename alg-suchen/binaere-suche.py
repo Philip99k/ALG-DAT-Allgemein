@@ -1,6 +1,6 @@
 import unittest
 
-# Function lineare_suche:
+# Function bineare_suche:
 # Parameter:
 #   liste: Array aus Elementen
 #   wert:  Wert, nach dem in der Liste gesucht wird
@@ -9,18 +9,36 @@ import unittest
 #   oder -1, falls kein Treffer
 
 
-def lineare_suche(liste, wert):
+def bineare_suche(liste, wert):  
 
-    # entweder:
-    # if wert in liste:
-    #     return liste.index(wert)
-    # return -1  
+    links = 0
+    rechts = len(liste) -1 
+    zaehler = 0
 
-    # oder :
-    for i in range(0, len(liste)):
-        if liste[i] == wert:
-            return i
+    while links <= rechts:
+        zaehler = zaehler + 1
+        mitte = (links + rechts) // 2
+        print ("Mitte: ", mitte)
+        if liste[mitte] == wert:
+            print("Zähler: ", zaehler)
+            return mitte
+        if liste[mitte] < wert:
+            links = mitte + 1
+        else: 
+            rechts = mitte -1
+    print("Zähler: ", zaehler)
     return -1
+            
+
+        # print (mitte)
+
+        # if wert > range(0, len(liste)
+
+
+        # for i in range(0, len(liste)):
+        #     if liste[i] == wert:
+        #         return i
+        # return -1
 
 
 # Testcases
@@ -34,7 +52,7 @@ class TestLineareSuche(unittest.TestCase):
         expected = 3
 
         # Act
-        result = lineare_suche(liste, wert)
+        result = bineare_suche(liste, wert)
 
         # Assert
         self.assertEqual(result, expected)
@@ -46,7 +64,7 @@ class TestLineareSuche(unittest.TestCase):
         expected = -1
 
         # Act
-        result = lineare_suche(liste, wert)
+        result = bineare_suche(liste, wert)
 
         # Assert
         self.assertEqual(result, expected)
@@ -54,11 +72,12 @@ class TestLineareSuche(unittest.TestCase):
     def test_3(self):
         # Arrange
         liste = [2,3,1,5,8,6,4,8]
+        liste.sort()
         wert = 1
-        expected = 2
+        expected = liste.index(wert)
 
         # Act
-        result = lineare_suche(liste, wert)
+        result = bineare_suche(liste, wert)
 
         # Assert
         self.assertEqual(result, expected)
@@ -70,7 +89,7 @@ class TestLineareSuche(unittest.TestCase):
         expected = 3
 
         # Act
-        result = lineare_suche(liste, wert)
+        result = bineare_suche(liste, wert)
 
         # Assert
         self.assertEqual(result, expected)
@@ -82,7 +101,7 @@ class TestLineareSuche(unittest.TestCase):
         expected = 20000000
 
         # Act
-        result = lineare_suche(liste, wert)
+        result = bineare_suche(liste, wert)
 
         # Assert
         self.assertEqual(result, expected)
